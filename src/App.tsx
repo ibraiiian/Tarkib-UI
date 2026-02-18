@@ -19,6 +19,7 @@ import AlertPage from '@/pages/components/AlertPage'
 import ProgressPage from '@/pages/components/ProgressPage'
 import TooltipPage from '@/pages/components/TooltipPage'
 import DialogPage from '@/pages/components/DialogPage'
+import ScrollStackPage from '@/pages/components/ScrollStackPage'
 import ComingSoonPage from '@/pages/ComingSoonPage'
 import InstallationPage from '@/pages/InstallationPage'
 import UtilsPage from '@/pages/UtilsPage'
@@ -53,6 +54,7 @@ export default function App() {
             <Route path="components/progress" element={<ProgressPage />} />
             <Route path="components/tooltip" element={<TooltipPage />} />
             <Route path="components/dialog" element={<DialogPage />} />
+            <Route path="components/scroll-stack" element={<ScrollStackPage />} />
           </Route>
 
           {/* Catch-all */}

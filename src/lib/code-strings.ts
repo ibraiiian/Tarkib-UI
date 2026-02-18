@@ -650,4 +650,65 @@ const DialogFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 DialogFooter.displayName = "DialogFooter"
 
 export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter }`,
+
+  scrollStack: `import * as React from 'react'
+import { useLayoutEffect, useRef, useCallback } from 'react'
+import type { ReactNode } from 'react'
+import Lenis from 'lenis'
+import { cn } from '@/lib/utils'
+
+export interface ScrollStackItemProps {
+  className?: string
+  children: ReactNode
+}
+
+export const ScrollStackItem: React.FC<ScrollStackItemProps> = ({ children, className }) => (
+  <div
+    className={cn(
+      "scroll-stack-card relative w-full min-h-[20rem] my-8 p-8 md:p-12 rounded-3xl shadow-[0_0_30px_rgba(0,0,0,0.08)] box-border origin-top will-change-transform bg-white border border-slate-200",
+      className
+    )}
+    style={{ backfaceVisibility: 'hidden', transformStyle: 'preserve-3d' }}
+  >
+    {children}
+  </div>
+)
+
+export interface ScrollStackProps {
+  className?: string
+  children: ReactNode
+  itemDistance?: number
+  itemScale?: number
+  itemStackDistance?: number
+  stackPosition?: string
+  scaleEndPosition?: string
+  baseScale?: number
+  rotationAmount?: number
+  blurAmount?: number
+  useWindowScroll?: boolean
+  onStackComplete?: () => void
+}
+
+const ScrollStack: React.FC<ScrollStackProps> = ({
+  children, className, itemDistance = 100, itemScale = 0.03,
+  itemStackDistance = 30, stackPosition = '20%', scaleEndPosition = '10%',
+  baseScale = 0.85, rotationAmount = 0, blurAmount = 0,
+  useWindowScroll = false, onStackComplete,
+}) => {
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  // ... scroll magic logic (lihat source lengkap di file) ...
+  return (
+    <div ref={scrollerRef} className={cn("relative w-full h-full overflow-y-auto", className)}>
+      <div className="scroll-stack-inner pt-[20vh] px-6 md:px-20 pb-[50rem] min-h-screen">
+        {children}
+        <div className="scroll-stack-end w-full h-px" />
+      </div>
+    </div>
+  )
+}
+
+export { ScrollStack }
+export default ScrollStack
+
+// Dependensi tambahan: npm install lenis`,
 }

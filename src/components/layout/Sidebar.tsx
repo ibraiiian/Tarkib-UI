@@ -63,6 +63,7 @@ export function Sidebar() {
                     <SidebarLink to="/docs/components/progress" label="Progress (Bar Progres)" />
                     <SidebarLink to="/docs/components/tooltip" label="Tooltip (Info Hover)" />
                     <SidebarLink to="/docs/components/dialog" label="Dialog (Modal)" />
+                    <SidebarLink to="/docs/components/scroll-stack" label="ScrollStack (Tumpukan)" />
                 </div>
             </div>
         </aside>
