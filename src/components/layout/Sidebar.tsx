@@ -66,6 +66,14 @@ export function Sidebar() {
                     <SidebarLink to="/docs/components/scroll-stack" label="ScrollStack (Tumpukan)" />
                 </div>
             </div>
+            <div className="mb-8">
+                <h3 className="px-3 mb-2 text-xs font-bold uppercase tracking-wider text-amber-500 font-mono flex items-center gap-1.5">
+                    ✨ Versi Ajib Nyee
+                </h3>
+                <div className="space-y-1">
+                    <p className="px-3 py-2 text-xs text-slate-400 italic">Segera hadir, Akhi... 🔥</p>
+                </div>
+            </div>
         </aside>
     )
 }
