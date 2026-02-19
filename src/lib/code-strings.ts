@@ -711,4 +711,91 @@ export { ScrollStack }
 export default ScrollStack
 
 // Dependensi tambahan: npm install lenis`,
+
+  animatedBeam: `import * as React from "react"
+import { cn } from "@/lib/utils"
+
+export interface AnimatedBeamProps {
+  className?: string
+  containerRef: React.RefObject<HTMLElement | null>
+  fromRef: React.RefObject<HTMLElement | null>
+  toRef: React.RefObject<HTMLElement | null>
+  curvature?: number
+  duration?: number
+  delay?: number
+  reverse?: boolean
+  gradientStartColor?: string
+  gradientStopColor?: string
+  pathWidth?: number
+  pathOpacity?: number
+}
+
+export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
+  className, containerRef, fromRef, toRef,
+  curvature = 0, duration = 2, delay = 0, reverse = false,
+  gradientStartColor = "#18ccfc", gradientStopColor = "#6344f5",
+  pathWidth = 2, pathOpacity = 0.2,
+}) => {
+  const [pathD, setPathD] = React.useState("")
+  const [svgDimensions, setSvgDimensions] = React.useState({ width: 0, height: 0 })
+  const beamId = React.useId()
+
+  const updatePath = React.useCallback(() => {
+    if (!containerRef.current || !fromRef.current || !toRef.current) return
+    const cRect = containerRef.current.getBoundingClientRect()
+    const fRect = fromRef.current.getBoundingClientRect()
+    const tRect = toRef.current.getBoundingClientRect()
+    setSvgDimensions({ width: cRect.width, height: cRect.height })
+    const sx = fRect.left - cRect.left + fRect.width / 2
+    const sy = fRect.top - cRect.top + fRect.height / 2
+    const ex = tRect.left - cRect.left + tRect.width / 2
+    const ey = tRect.top - cRect.top + tRect.height / 2
+    setPathD(\`M \${sx},\${sy} Q \${(sx+ex)/2},\${(sy+ey)/2+curvature} \${ex},\${ey}\`)
+  }, [containerRef, fromRef, toRef, curvature])
+
+  React.useEffect(() => {
+    updatePath()
+    const obs = new ResizeObserver(() => updatePath())
+    if (containerRef.current) obs.observe(containerRef.current)
+    return () => obs.disconnect()
+  }, [updatePath, containerRef])
+
+  return (
+    <svg fill="none" width={svgDimensions.width} height={svgDimensions.height}
+      className={cn("pointer-events-none absolute inset-0", className)}>
+      <path d={pathD} stroke="#d1d5db" strokeWidth={pathWidth} strokeOpacity={pathOpacity} strokeLinecap="round" fill="none" />
+      <path d={pathD} strokeWidth={pathWidth} stroke={\`url(#g-\${beamId})\`} strokeLinecap="round" fill="none" mask={\`url(#m-\${beamId})\`} />
+      <defs>
+        <linearGradient id={\`g-\${beamId}\`} gradientUnits="userSpaceOnUse">
+          <stop stopColor={gradientStartColor} stopOpacity="0" />
+          <stop stopColor={gradientStartColor} />
+          <stop offset="32.5%" stopColor={gradientStopColor} />
+          <stop offset="100%" stopColor={gradientStopColor} stopOpacity="0" />
+        </linearGradient>
+        <mask id={\`m-\${beamId}\`}>
+          <rect width="100%" height="100%" fill="black" />
+          {pathD && <circle r="10" fill="white">
+            <animateMotion dur={\`\${duration}s\`} repeatCount="indefinite" begin={\`\${delay}s\`}
+              path={pathD} rotate="auto" keyPoints={reverse ? "1;0" : "0;1"} keyTimes="0;1" />
+          </circle>}
+        </mask>
+      </defs>
+    </svg>
+  )
+}
+
+export interface SorotNodeProps extends React.HTMLAttributes<HTMLDivElement> {
+  size?: "sm" | "default" | "lg"
+}
+
+export const SorotNode = React.forwardRef<HTMLDivElement, SorotNodeProps>(
+  ({ className, size = "default", children, ...props }, ref) => (
+    <div ref={ref} className={cn(
+      "z-10 flex items-center justify-center rounded-full border-2 border-slate-200 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+      { "size-10": size === "sm", "size-12": size === "default", "size-16": size === "lg" },
+      className
+    )} {...props}>{children}</div>
+  )
+)
+SorotNode.displayName = "SorotNode"`,
 }

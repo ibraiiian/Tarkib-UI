@@ -20,6 +20,7 @@ import ProgressPage from '@/pages/components/ProgressPage'
 import TooltipPage from '@/pages/components/TooltipPage'
 import DialogPage from '@/pages/components/DialogPage'
 import ScrollStackPage from '@/pages/components/ScrollStackPage'
+import AnimatedBeamPage from '@/pages/components/AnimatedBeamPage'
 import ComingSoonPage from '@/pages/ComingSoonPage'
 import InstallationPage from '@/pages/InstallationPage'
 import UtilsPage from '@/pages/UtilsPage'
@@ -55,6 +56,8 @@ export default function App() {
             <Route path="components/tooltip" element={<TooltipPage />} />
             <Route path="components/dialog" element={<DialogPage />} />
             <Route path="components/scroll-stack" element={<ScrollStackPage />} />
+            {/* Versi Ajib Nyee ✨ */}
+            <Route path="ajib/animated-beam" element={<AnimatedBeamPage />} />
           </Route>
 
           {/* Catch-all */}

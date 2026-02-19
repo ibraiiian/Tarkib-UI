@@ -71,7 +71,7 @@ export function Sidebar() {
                     ✨ Versi Ajib Nyee
                 </h3>
                 <div className="space-y-1">
-                    <p className="px-3 py-2 text-xs text-slate-400 italic">Segera hadir, Akhi... 🔥</p>
+                    <SidebarLink to="/docs/ajib/animated-beam" label="Animated Beam" />
                 </div>
             </div>
         </aside>
