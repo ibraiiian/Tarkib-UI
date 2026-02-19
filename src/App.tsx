@@ -21,6 +21,7 @@ import TooltipPage from '@/pages/components/TooltipPage'
 import DialogPage from '@/pages/components/DialogPage'
 import ScrollStackPage from '@/pages/components/ScrollStackPage'
 import AnimatedBeamPage from '@/pages/components/AnimatedBeamPage'
+import ThreeDCardPage from '@/pages/components/ThreeDCardPage'
 import ComingSoonPage from '@/pages/ComingSoonPage'
 import InstallationPage from '@/pages/InstallationPage'
 import UtilsPage from '@/pages/UtilsPage'
@@ -58,6 +59,7 @@ export default function App() {
             <Route path="components/scroll-stack" element={<ScrollStackPage />} />
             {/* Versi Ajib Nyee ✨ */}
             <Route path="ajib/animated-beam" element={<AnimatedBeamPage />} />
+            <Route path="ajib/3d-card" element={<ThreeDCardPage />} />
           </Route>
 
           {/* Catch-all */}

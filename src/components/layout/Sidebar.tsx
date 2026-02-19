@@ -72,6 +72,7 @@ export function Sidebar() {
                 </h3>
                 <div className="space-y-1">
                     <SidebarLink to="/docs/ajib/animated-beam" label="Animated Beam" />
+                    <SidebarLink to="/docs/ajib/3d-card" label="3D Card (Kartu 3D)" />
                 </div>
             </div>
         </aside>
